@@ -296,11 +296,15 @@
             from, to { border-color: transparent; }
             50% { border-color: black; }
         }
+        .static-text {
+            font-size: 1rem; /* Smaller font size for static text */
+            display: none; /* Hidden by default */
+        }
     </style>
 </head>
 <body>
-    <img src="ALGORYTHM LAB.png" alt="Company Logo" width="200" height="100">
    <header>
+       <img src="ALGORYTHM LAB.png" alt="Company Logo" width="200" height="100">
         <div class="container">
             <div id="branding">
                 <h1><span class="highlight">Algorythm</span> Lab</h1>
@@ -320,23 +324,9 @@
         <div class="container">
             <h1>Welcome to Algorythm Lab</h1>
             <center>
-            <h1 id="typewriter"></h1>
-
-    <script>
-        const text = "Explore Data Structures and Algorithms through a state-of-the art Socratic Conversational AI!";
-        let index = 0;
-
-        function typeWriter() {
-            if (index < text.length) {
-                document.getElementById("typewriter").innerHTML += text.charAt(index);
-                index++;
-                setTimeout(typeWriter, 100); // Adjust speed by changing the 100ms delay
-            }
-        }
-
-        typeWriter();
-    </script>
+                <p>Explore Data Structures and Algorithms through a state-of-the art Socratic Conversational AI!</p>
             </center>
+            
             <a href="#topics" class="btn">Get Started</a>
         </div>
     </section>
@@ -354,7 +344,7 @@
             <h2>Topics</h2>
             <div class="topic-grid">
                 <div class="topic-card" id="sorting-algorithms">
-                    <img src="/api/placeholder/400/300" alt="Sorting Algorithms">
+                    <img src="sorting.webp" alt="Sorting Algorithms">
                     <h3>Sorting Algorithms</h3>
                     <p>Dive deep into various sorting techniques and their implementations.</p>
                 </div>
