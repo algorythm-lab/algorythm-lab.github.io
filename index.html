@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlgoRythm Lab</title>
+    <style>
+        :root {
+            --primary-color: #a31f34;
+            --secondary-color: #8a8b8c;
+            --background-color: #f7f7f7;
+            --text-color: #222;
+            --link-color: #0056b3;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+        }
+        
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        
+        header {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        header a {
+            color: #ffffff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        
+        header ul {
+            display: flex;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        header li {
+            margin-left: 20px;
+        }
+        
+        header #branding h1 {
+            margin: 0;
+            font-size: 1.8em;
+        }
+        
+        header .highlight {
+            font-weight: bold;
+            color: #ffffff;
+        }
+        
+        #showcase {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/api/placeholder/1920/1080') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #ffffff;
+            padding-top: 60px;
+        }
+        
+        #showcase h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        #showcase p {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: var(--primary-color);
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2em;
+            transition: background-color 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #7f1a29;
+        }
+        
+        section {
+            padding: 60px 0;
+        }
+        
+        section h2 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 40px;
+        }
+        
+        #topics .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .topic-card {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .topic-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .topic-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        
+        .topic-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        
+        #contact {
+            background-color: #e9ecef;
+        }
+        
+        #contact form {
+            display: grid;
+            gap: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+        
+        #contact input, #contact textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        footer {
+            background: var(--primary-color);
+            color: #ffffff;
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        
+        .modal-content {
+            background-color: #fefefe;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 700px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+        }
+        
+        #chatbox {
+            height: 400px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            overflow-y: scroll;
+            margin-bottom: 20px;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+        
+        .chat-input-container {
+            display: flex;
+            gap: 10px;
+        }
+        
+        #user-input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        #send-button {
+            padding: 10px 20px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        #send-button:hover {
+            background-color: #7f1a29;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1><span class="highlight">AlgoRythm</span> Lab</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#topics">Topics</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="showcase">
+        <div class="container">
+            <h1>Welcome to AlgoRythm Lab</h1>
+            <p>Explore Data Structures and Algorithms through Conversational AI</p>
+            <a href="#topics" class="btn">Get Started</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container">
+            <h2>About Us</h2>
+            <p>AlgoRythm Lab is a cutting-edge project that harnesses the power of conversational AI to revolutionize the study of Data Structures and Algorithms (DSA). Our mission is to make learning DSA an interactive, engaging, and accessible experience for students and professionals alike. By combining advanced AI technology with comprehensive DSA curriculum, we're paving the way for a new era of computer science education.</p>
+        </div>
+    </section>
+
+    <section id="topics">
+        <div class="container">
+            <h2>Topics</h2>
+            <div class="topic-grid">
+                <div class="topic-card" id="sorting-algorithms">
+                    <img src="/api/placeholder/400/300" alt="Sorting Algorithms">
+                    <h3>Sorting Algorithms</h3>
+                    <p>Dive deep into various sorting techniques and their implementations.</p>
+                </div>
+                <!-- Placeholder for future topics -->
+                <div class="topic-card">
+                    <img src="/api/placeholder/400/300" alt="Coming Soon">
+                    <h3>More Topics Coming Soon</h3>
+                    <p>Stay tuned for additional exciting algorithm and data structure topics!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Us</h2>
+            <form>
+                <input type="text" placeholder="Name" required>
+                <input type="email" placeholder="Email" required>
+                <textarea placeholder="Your Message" required></textarea>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 AlgoRythm Lab. All rights reserved.</p>
+    </footer>
+
+    <!-- Chat modal -->
+    <div id="chat-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Chat about Sorting Algorithms</h2>
+            <div id="chatbox"></div>
+            <div class="chat-input-container">
+                <input type="text" id="user-input" placeholder="Type your message...">
+                <button id="send-button">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get the modal
+        var modal = document.getElementById("chat-modal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("sorting-algorithms");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks on the button, open the modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        // Chat functionality
+        const chatbox = document.getElementById('chatbox');
+        const userInput = document.getElementById('user-input');
+        const sendButton = document.getElementById('send-button');
+
+        function addMessage(message, isUser = false) {
+            const messageElement = document.createElement('p');
+            messageElement.textContent = isUser ? `You: ${message}` : `Bot: ${message}`;
+            messageElement.style.padding = '10px';
+            messageElement.style.borderRadius = '5px';
+            messageElement.style.marginBottom = '10px';
+            messageElement.style.maxWidth = '80%';
+            
+            if (isUser) {
+                messageElement.style.backgroundColor = '#e1f3fb';
+                messageElement.style.marginLeft = 'auto';
+            } else {
+                messageElement.style.backgroundColor = '#f0f0f0';
+            }
+            
+            chatbox.appendChild(messageElement);
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }
+
+        async function handleUserInput() {
+            const message = userInput.value.trim();
+            if (message) {
+                addMessage(message, true);
+                userInput.value = '';
+                
+                try {
+                    // Simulating API call
+                    const response = await new Promise(resolve => {
+                        setTimeout(() => {
+                            resolve({ ok: true, json: () => ({ reply: "I'm an AI assistant specialized in sorting algorithms. How can I help you today?" }) });
+                        }, 1000);
+                    });
+                    
+                    if (response.ok) {
+                        const data = await response.json();
+                        addMessage(data.reply);
+                    } else {
+                        throw new Error('Network response was not ok.');
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    addMessage('Sorry, there was an error processing your request.');
+                }
+            }
+        }
+
+        sendButton.addEventListener('click', handleUserInput);
+        userInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                handleUserInput();
+            }
+        });
+    </script>
+</body>
+</html>
