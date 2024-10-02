@@ -277,9 +277,29 @@
         #send-button:hover {
             background-color: var(--secondary-color);
         }
+
+        #typewriter {
+            font-family: 'Arial', sans-serif;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 3px solid;
+            width: 0;
+            animation: typing 4s steps(40, end), blink 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink {
+            from, to { border-color: transparent; }
+            50% { border-color: black; }
+        }
     </style>
 </head>
 <body>
+    <img src="ALGORYTHM LAB.png" alt="Company Logo" width="200" height="100">
    <header>
         <div class="container">
             <div id="branding">
@@ -298,9 +318,24 @@
 
     <section id="showcase">
         <div class="container">
-            <h1>Welcome to AlgoRythm Lab</h1>
+            <h1>Welcome to Algorythm Lab</h1>
             <center>
-            <p>Explore Data Structures and Algorithms through a state-of-the art Socratic Conversational AI!</p>
+            <h1 id="typewriter"></h1>
+
+    <script>
+        const text = "Explore Data Structures and Algorithms through a state-of-the art Socratic Conversational AI!";
+        let index = 0;
+
+        function typeWriter() {
+            if (index < text.length) {
+                document.getElementById("typewriter").innerHTML += text.charAt(index);
+                index++;
+                setTimeout(typeWriter, 100); // Adjust speed by changing the 100ms delay
+            }
+        }
+
+        typeWriter();
+    </script>
             </center>
             <a href="#topics" class="btn">Get Started</a>
         </div>
